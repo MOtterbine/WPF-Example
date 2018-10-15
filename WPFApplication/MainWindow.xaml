@@ -1,0 +1,92 @@
+﻿<Window x:Class="OS.WPFJamme.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:exConverter="clr-namespace:OS.WPFJamme"
+        Icon="App.ico" Title="WPF Tester" Height="460.206" Width="737.338" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="txtRunning" TargetType="Label">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ErrorOcurred}" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                    <!--<Setter Property="Text" Value="Running..."/>-->
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=ErrorOcurred}" Value="False">
+                    <Setter Property="Foreground" Value="Green"/>
+                    <!--<Setter Property="Text" Value="Done..."/>-->
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="txtColoring" TargetType="ScrollViewer">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=ErrorOcurred}" Value="True">
+                    <Setter Property="Foreground" Value="Red"/>
+                    <!--<Setter Property="Text" Value="Running..."/>-->
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=ErrorOcurred}" Value="False">
+                    <Setter Property="Foreground" Value="Green"/>
+                    <!--<Setter Property="Text" Value="Done..."/>-->
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <exConverter:BoolToOppositeBoolConverter x:Key="oppositeConverter" />
+    </Window.Resources>
+    <Grid Margin="0,0,2,0">
+        <TabControl HorizontalAlignment="Left" Height="238.389" Margin="10,10,0,0" VerticalAlignment="Top" Width="711">
+            <TabItem Header="Database Connection">
+                <Grid Background="#FFE5E5E5">
+                    <Button Content="{Binding ConnectionButtonText}" Command="{Binding DBConnectionCommand}" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" VerticalAlignment="Top" Width="88" FontSize="14"/>
+                    <Label Content="{Binding TotalCharges}" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="117,53,0,0" VerticalAlignment="Top" Height="23" Width="77" FontSize="12"/>
+                    <Label HorizontalContentAlignment="Right" Content="Charges Total" HorizontalAlignment="Left" Margin="12,50,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Label HorizontalContentAlignment="Right" Content="Debits Total" HorizontalAlignment="Left" Margin="12,81,0,0" VerticalAlignment="Top" Width="90"/>
+                    <Label Content="Conn. String:" HorizontalAlignment="Left" Margin="117,10,0,0" VerticalAlignment="Top" Width="88"/>
+                    <TextBox IsEnabled="{Binding DBConnected, Converter={StaticResource oppositeConverter}}" Text="{Binding DBConnectionString}" HorizontalAlignment="Left" Height="26" Margin="205,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="485" />
+                    <Button Command="{Binding TestCommand}" Content="Run Query" HorizontalAlignment="Left" Height="22.96" Margin="205,53,0,0" VerticalAlignment="Top" Width="88" FontSize="14" IsDefault="True" RenderTransformOrigin="2.818,8.484"/>
+                    <Label Content="Program Code:" HorizontalAlignment="Left" Margin="298,52,0,0" VerticalAlignment="Top" Width="90"/>
+                    <TextBox x:Name="PolicyIDTextBox" Text="{Binding PolicyID}" HorizontalAlignment="Left" Height="23" Margin="393,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" IsEnabled="{Binding DBConnected}"/>
+                    <ComboBox IsEnabled="{Binding DBConnected}" HorizontalAlignment="Left" Margin="540,62,0,0" VerticalAlignment="Top" Width="140" />
+                    <Button Command="{Binding PopulateDBCommand}" Content="Populate" HorizontalAlignment="Left" Height="26" Margin="205,83.96,0,0" VerticalAlignment="Top" Width="88" FontSize="14" IsDefault="True" RenderTransformOrigin="2.818,8.484"/>
+                    <TextBox x:Name="tb_NumberOfRecords" Text="{Binding RecordCreationCount}" IsEnabled="{Binding DBConnected}" HorizontalAlignment="Left" Height="22.96" Margin="302,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Web Page Access">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox Text="{Binding URLToRequest}" HorizontalAlignment="Left" Height="38" Margin="10,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="681" />
+                    <Button Command="{Binding RunURLCommand}" Content="Call Page" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" IsDefault="True" RenderTransformOrigin="2.818,8.484"/>
+                    <Label Content="Program Code:" HorizontalAlignment="Left" Margin="129,10,0,0" VerticalAlignment="Top" Width="90"/>
+                    <TextBox x:Name="HTML_PolicyID" Text="{Binding PolicyID}" HorizontalAlignment="Left" Height="26" Margin="220,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="88" />
+                    <Label Content="HTML Address" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Width="100"/>
+                    <ComboBox SelectedValue="{Binding HTTPProfile}"  DisplayMemberPath="Key" SelectedValuePath="Key" ItemsSource="{Binding HTMLAddresses}" HorizontalAlignment="Left" Margin="115,43,0,0" VerticalAlignment="Top" Width="576" />
+                    <!--IsSynchronizedWithCurrentItem="True" SelectedValuePath="keys" DisplayMemberPath="values"/-->
+                </Grid>
+            </TabItem>
+            <TabItem Header="Emailer" >
+                <Grid Background="#FFE5E5E5">
+                    <Button Command="{Binding SendEmailCommand}" Content="Send Email" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" FontSize="14" IsDefault="True" RenderTransformOrigin="2.818,8.484"/>
+                    <Label Content="UserName" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" Width="69"/>
+                    <TextBox x:Name="tb_UserName" Text="{Binding EmailUserName}" HorizontalAlignment="Left" Height="26" Margin="199,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" />
+                    <Label Content="Password" HorizontalAlignment="Left" Margin="129,43,0,0" VerticalAlignment="Top" Width="70"/>
+                    <TextBox x:Name="tb_Password" Text="{Binding EmailPassword}" HorizontalAlignment="Left" Height="26" Margin="199,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" />
+                    <Label Content="SMTP Server" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="85"/>
+                    <TextBox x:Name="tb_SMTPServer" Text="{Binding SMTPServer}" HorizontalAlignment="Left" Height="26" Margin="95,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" />
+                    <Label Content="From" HorizontalAlignment="Left" Margin="328,11.156,0,0" VerticalAlignment="Top" Width="54"/>
+                    <TextBox x:Name="tb_From" Text="{Binding EmailFrom}" HorizontalAlignment="Left" Height="26" Margin="387,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" />
+                    <Label Content="To" HorizontalAlignment="Left" Margin="328,44,0,0" VerticalAlignment="Top" Width="52"/>
+                    <TextBox x:Name="tb_To" Text="{Binding EmailTo}" HorizontalAlignment="Left" Height="26" Margin="387,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" />
+                    <Label Content="Subject" HorizontalAlignment="Left" Margin="328,75,0,0" VerticalAlignment="Top" Width="59"/>
+                    <TextBox x:Name="tb_Subject" Text="{Binding EmailSubject}" HorizontalAlignment="Left" Height="26" Margin="387,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="304" />
+                    <Label Content="Body" HorizontalAlignment="Left" Margin="40,144,0,0" VerticalAlignment="Top" Width="50"/>
+                    <TextBox x:Name="tb_Subject_Copy" Text="{Binding EmailBody}" HorizontalAlignment="Left" Height="52.429" Margin="95,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="596" />
+                    <Label Content="Port" HorizontalAlignment="Left" Margin="10,104.96,0,0" VerticalAlignment="Top" Width="37.626"/>
+                    <TextBox x:Name="tb_SMTPPort" Text="{Binding SMTPPort}" HorizontalAlignment="Left" Height="26" Margin="95,105.96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52.374" />
+                    <!--IsSynchronizedWithCurrentItem="True" SelectedValuePath="keys" DisplayMemberPath="values"/-->
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Label Content="{Binding TimeLabel}" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="618,0,0,0" VerticalAlignment="Top" Height="25" Width="101" FontSize="14"/>
+        <ScrollViewer Style="{StaticResource txtColoring}"  HorizontalAlignment="Left" Height="168.611" Margin="12,253.389,0,0" VerticalAlignment="Top" Width="707">
+            <TextBlock TextWrapping="Wrap" Text ="{Binding InfoText}" Height="197.361"></TextBlock>
+        </ScrollViewer>
+    </Grid>
+</Window>

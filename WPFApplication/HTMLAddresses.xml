@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dictionary>
+  <item>
+    <key>
+      <string>google</string>
+    </key>
+    <value>
+      <string>http://www.google.com</string>
+    </value>
+  </item>
+  <item>
+    <key>
+      <string>Bing</string>
+    </key>
+    <value>
+      <string>http://www.bing.com</string>
+    </value>
+  </item>
+</dictionary>

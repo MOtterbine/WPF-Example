@@ -1,0 +1,36 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="OS.WPFJamme.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PolicyID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">44</Value>
+    </Setting>
+    <Setting Name="ConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Server = MT-WS-MO\SQLEXPRESS; Database = Tests; Trusted_Connection = True</Value>
+    </Setting>
+    <Setting Name="URLToRequest" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:53731/exe.ach?handler=handler1&amp;command=export</Value>
+    </Setting>
+    <Setting Name="HTTPProfile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Local-Export</Value>
+    </Setting>
+    <Setting Name="SMTPServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mail.optimum.net</Value>
+    </Setting>
+    <Setting Name="EmailUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JohnDoe</Value>
+    </Setting>
+    <Setting Name="EmailFrom" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JohnDoe@Contoso.com</Value>
+    </Setting>
+    <Setting Name="EmailTo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JaneDoe@Contoso.com</Value>
+    </Setting>
+    <Setting Name="EmailSubject" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SMTPPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
